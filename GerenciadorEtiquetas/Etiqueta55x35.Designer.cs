@@ -115,6 +115,7 @@ namespace GerenciadorEtiquetas
             this.checkBox1.TabIndex = 40;
             this.checkBox1.Text = "Leroy";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
             // 
             // tbCodProduto
             // 

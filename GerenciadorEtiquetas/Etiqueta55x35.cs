@@ -45,7 +45,7 @@ namespace GerenciadorEtiquetas
 
             tbQtde.Text = Convert.ToString("01");
             checkBox1.Size = new Size(150, 36);
-            
+
 
         }
         #endregion
@@ -87,7 +87,7 @@ namespace GerenciadorEtiquetas
                 {
                     DataTable dtRes = new DataTable();
                     dtRes = classbd.BuscaInfoEtiqueta(tbCodProduto.Text);
-                    
+
                     if (dtRes.Rows.Count == 0)
                     {
                         MessageBox.Show("Não foi encontrado nenhuma Produto com o número: " + tbCodProduto.Text, "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -95,33 +95,9 @@ namespace GerenciadorEtiquetas
                         tbCodProduto.Focus();
 
                     }
-                    else if (checkBox1.Checked)
-                    {
-
-                        lbCodigo.Text = dtRes.Rows[0]["pro_codigo"].ToString();
-                        lbDescricao.Text = dtRes.Rows[0]["pro_resumo"].ToString().ToString();
-                        lbGtin.Text = dtRes.Rows[0]["pro_barra"].ToString();
-
-
-                        Image codbarrasCod = Code128Rendering.MakeBarcodeImage(dtRes.Rows[0]["pro_codigo"].ToString(), 2, false);
-                        pbCodProd.Image = codbarrasCod;
-                        pbCodProd.Image.Save(@"C:\Windows\Temp\CodProd.jpg");
-
-                        Image codbarrasQtde = Code128Rendering.MakeBarcodeImage(tbQtde.Text, 2, false);
-                        pbCodQtde.Image = codbarrasQtde;
-                        pbCodQtde.Image.Save(@"C:\Windows\Temp\CodQtde.jpg");
-
-                        Zen.Barcode.Code128BarcodeDraw brCode = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
-                        Image Gtin = brCode.Draw(dtRes.Rows[0]["pro_barra"].ToString(), 60);
-                        pbGtin.Image = Gtin;
-                        pbGtin.Image.Save(@"C:\Windows\Temp\CodGtin.jpg");
-                        Gtin.Dispose();
-
-                    }
                     else
                     {
-                     
-                   
+
                         if (VerificaGtin(dtRes.Rows[0]["pro_barra"].ToString()))
                         {
 
@@ -133,24 +109,24 @@ namespace GerenciadorEtiquetas
                             Image codbarrasCod = Code128Rendering.MakeBarcodeImage(dtRes.Rows[0]["pro_codigo"].ToString(), 2, false);
                             pbCodProd.Image = codbarrasCod;
                             pbCodProd.Image.Save(@"C:\Windows\Temp\CodProd.jpg");
-                  
+
 
                             Image codbarrasQtde = Code128Rendering.MakeBarcodeImage(tbQtde.Text, 2, false);
                             pbCodQtde.Image = codbarrasQtde;
                             pbCodQtde.Image.Save(@"C:\Windows\Temp\CodQtde.jpg");
-                  
+
                             Zen.Barcode.Code128BarcodeDraw brCode = Zen.Barcode.BarcodeDrawFactory.Code128WithChecksum;
                             Image Gtin = brCode.Draw(dtRes.Rows[0]["pro_barra"].ToString(), 60);
                             pbGtin.Image = Gtin;
                             pbGtin.Image.Save(@"C:\Windows\Temp\CodGtin.jpg");
                             Gtin.Dispose();
-                           
+
                         }
                         else
                         {
                             MessageBox.Show("Este Produto não tem o código GTIN-13 válido", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
-                       
+
                     }
                 }
             }
@@ -203,7 +179,7 @@ namespace GerenciadorEtiquetas
                             printDocument1.PrinterSettings = printDialog1.PrinterSettings;
                             printDocument1.Print();
                         }
-                      
+
                     }
                 }
             }
