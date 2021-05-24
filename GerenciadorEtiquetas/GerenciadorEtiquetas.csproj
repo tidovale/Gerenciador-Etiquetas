@@ -70,8 +70,8 @@
     <Reference Include="FirebirdSql.Data.FirebirdClient, Version=7.10.1.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
       <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.7.10.1\lib\net452\FirebirdSql.Data.FirebirdClient.dll</HintPath>
     </Reference>
-    <Reference Include="GenCode128">
-      <HintPath>..\..\..\..\OneDrive\Área de Trabalho\Etiqueta - Transportadora\packages\GenCode128.1.0.0\lib\GenCode128.dll</HintPath>
+    <Reference Include="GenCode128, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GenCode128.1.0.0\lib\GenCode128.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -103,8 +103,8 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="Zen.Barcode.Core">
-      <HintPath>..\..\..\..\OneDrive\Área de Trabalho\EtiquetaCOD\EtiquetaCOD\bin\Debug\Zen.Barcode.Core.dll</HintPath>
+    <Reference Include="Zen.Barcode.Core, Version=3.1.0.0, Culture=neutral, PublicKeyToken=b5ae55aa76d2d9de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Zen.Barcode.Rendering.Framework.3.1.10729.1\lib\Zen.Barcode.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +139,12 @@
     <Compile Include="Etiqueta55x35semDescricao.Designer.cs">
       <DependentUpon>Etiqueta55x35semDescricao.cs</DependentUpon>
     </Compile>
+    <Compile Include="EtiquetaCaixa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EtiquetaCaixa.Designer.cs">
+      <DependentUpon>EtiquetaCaixa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -161,6 +167,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Etiqueta55x35semDescricao.resx">
       <DependentUpon>Etiqueta55x35semDescricao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EtiquetaCaixa.resx">
+      <DependentUpon>EtiquetaCaixa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -221,6 +230,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\segundo passo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\img.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

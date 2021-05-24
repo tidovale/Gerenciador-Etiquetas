@@ -35,6 +35,9 @@ namespace GerenciadorEtiquetas
             this.label3 = new System.Windows.Forms.Label();
             this.tbQtde = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbGtin = new System.Windows.Forms.Label();
+            this.lbLogo = new System.Windows.Forms.Label();
+            this.lbTambasa = new System.Windows.Forms.Label();
             this.lbData = new System.Windows.Forms.Label();
             this.lbQtde = new System.Windows.Forms.Label();
             this.lbDescricao = new System.Windows.Forms.Label();
@@ -62,7 +65,6 @@ namespace GerenciadorEtiquetas
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lbTambasa = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -111,6 +113,8 @@ namespace GerenciadorEtiquetas
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.Window;
+            this.panel1.Controls.Add(this.lbGtin);
+            this.panel1.Controls.Add(this.lbLogo);
             this.panel1.Controls.Add(this.lbTambasa);
             this.panel1.Controls.Add(this.lbData);
             this.panel1.Controls.Add(this.lbQtde);
@@ -124,6 +128,36 @@ namespace GerenciadorEtiquetas
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(372, 117);
             this.panel1.TabIndex = 30;
+            // 
+            // lbGtin
+            // 
+            this.lbGtin.AutoSize = true;
+            this.lbGtin.Location = new System.Drawing.Point(90, 89);
+            this.lbGtin.Name = "lbGtin";
+            this.lbGtin.Size = new System.Drawing.Size(41, 13);
+            this.lbGtin.TabIndex = 22;
+            this.lbGtin.Text = "label11";
+            this.lbGtin.Visible = false;
+            // 
+            // lbLogo
+            // 
+            this.lbLogo.AutoSize = true;
+            this.lbLogo.Location = new System.Drawing.Point(90, 89);
+            this.lbLogo.Name = "lbLogo";
+            this.lbLogo.Size = new System.Drawing.Size(41, 13);
+            this.lbLogo.TabIndex = 21;
+            this.lbLogo.Text = "label11";
+            this.lbLogo.Visible = false;
+            // 
+            // lbTambasa
+            // 
+            this.lbTambasa.AutoSize = true;
+            this.lbTambasa.Location = new System.Drawing.Point(90, 90);
+            this.lbTambasa.Name = "lbTambasa";
+            this.lbTambasa.Size = new System.Drawing.Size(41, 13);
+            this.lbTambasa.TabIndex = 20;
+            this.lbTambasa.Text = "label11";
+            this.lbTambasa.Visible = false;
             // 
             // lbData
             // 
@@ -404,16 +438,6 @@ namespace GerenciadorEtiquetas
             this.pictureBox1.TabIndex = 39;
             this.pictureBox1.TabStop = false;
             // 
-            // lbTambasa
-            // 
-            this.lbTambasa.AutoSize = true;
-            this.lbTambasa.Location = new System.Drawing.Point(120, 101);
-            this.lbTambasa.Name = "lbTambasa";
-            this.lbTambasa.Size = new System.Drawing.Size(41, 13);
-            this.lbTambasa.TabIndex = 20;
-            this.lbTambasa.Text = "label11";
-            this.lbTambasa.Visible = false;
-            // 
             // Etiqueta10x5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,5 +509,7 @@ namespace GerenciadorEtiquetas
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label lbRev;
         private System.Windows.Forms.Label lbTambasa;
+        private System.Windows.Forms.Label lbLogo;
+        private System.Windows.Forms.Label lbGtin;
     }
 }

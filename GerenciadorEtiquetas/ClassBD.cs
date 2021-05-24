@@ -51,7 +51,7 @@ namespace GerenciadorEtiquetas
             DataTable dtRes = new DataTable();
             try
             {
-                con = obterConexaoSJC();
+                con = obterConexaoSPM();
                 con.Open();
                 FbCommand cmd = new FbCommand("select p.pro_codigo, p.pro_barra, p.pro_resumo from produtos p where p.pro_codigo='" + CodProduto + "'", con);
                 dtRes.Load(cmd.ExecuteReader());

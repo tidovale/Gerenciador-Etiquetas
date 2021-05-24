@@ -122,7 +122,7 @@ namespace GerenciadorEtiquetas
         #region VerificaGtin
         private bool VerificaGtin(string Gtin)
         {
-            if (Gtin.Contains("78984886"))
+            if (Gtin.Contains("789848864") || Gtin.Contains("789848865"))
             {
                 return true;
             }

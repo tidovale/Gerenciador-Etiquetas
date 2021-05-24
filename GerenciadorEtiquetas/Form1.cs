@@ -19,7 +19,7 @@ namespace GerenciadorEtiquetas
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         #region Botao_Fechar
@@ -80,11 +80,21 @@ namespace GerenciadorEtiquetas
         }
         #endregion
 
+        #region Botao Abrir Etiqueta Caixa
+        private void button3_Click(object sender, EventArgs e)
+        {
+            EtiquetaCaixa etiquetaCaixa = new EtiquetaCaixa();
+            etiquetaCaixa.Show();
+        }
+        #endregion
+
         #region Suporte T.I
         private void button2_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://192.168.10.8/glpi");
         }
         #endregion
+
+
     }
 }

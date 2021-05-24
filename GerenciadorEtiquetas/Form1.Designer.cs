@@ -31,6 +31,7 @@ namespace GerenciadorEtiquetas
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.Etiqueta55x35com = new System.Windows.Forms.Button();
             this.Etiqueta35x22Com = new System.Windows.Forms.Button();
             this.Etiqueta35x22sem = new System.Windows.Forms.Button();
@@ -69,6 +70,7 @@ namespace GerenciadorEtiquetas
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.Etiqueta55x35com);
             this.panel1.Controls.Add(this.Etiqueta35x22Com);
             this.panel1.Controls.Add(this.Etiqueta35x22sem);
@@ -83,13 +85,28 @@ namespace GerenciadorEtiquetas
             this.panel1.Size = new System.Drawing.Size(198, 690);
             this.panel1.TabIndex = 4;
             // 
+            // button3
+            // 
+            this.button3.FlatAppearance.BorderSize = 0;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button3.Location = new System.Drawing.Point(5, 605);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(190, 81);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "Etiqueta - 35 x 22 \r\nNúmeração\r\n";
+            this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Etiqueta55x35com
             // 
             this.Etiqueta55x35com.FlatAppearance.BorderSize = 0;
             this.Etiqueta55x35com.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Etiqueta55x35com.Image = ((System.Drawing.Image)(resources.GetObject("Etiqueta55x35com.Image")));
             this.Etiqueta55x35com.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Etiqueta55x35com.Location = new System.Drawing.Point(0, 340);
+            this.Etiqueta55x35com.Location = new System.Drawing.Point(0, 306);
             this.Etiqueta55x35com.Name = "Etiqueta55x35com";
             this.Etiqueta55x35com.Size = new System.Drawing.Size(194, 81);
             this.Etiqueta55x35com.TabIndex = 2;
@@ -104,7 +121,7 @@ namespace GerenciadorEtiquetas
             this.Etiqueta35x22Com.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Etiqueta35x22Com.Image = ((System.Drawing.Image)(resources.GetObject("Etiqueta35x22Com.Image")));
             this.Etiqueta35x22Com.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Etiqueta35x22Com.Location = new System.Drawing.Point(3, 576);
+            this.Etiqueta35x22Com.Location = new System.Drawing.Point(3, 513);
             this.Etiqueta35x22Com.Name = "Etiqueta35x22Com";
             this.Etiqueta35x22Com.Size = new System.Drawing.Size(194, 86);
             this.Etiqueta35x22Com.TabIndex = 1;
@@ -119,7 +136,7 @@ namespace GerenciadorEtiquetas
             this.Etiqueta35x22sem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Etiqueta35x22sem.Image = ((System.Drawing.Image)(resources.GetObject("Etiqueta35x22sem.Image")));
             this.Etiqueta35x22sem.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Etiqueta35x22sem.Location = new System.Drawing.Point(3, 454);
+            this.Etiqueta35x22sem.Location = new System.Drawing.Point(3, 407);
             this.Etiqueta35x22sem.Name = "Etiqueta35x22sem";
             this.Etiqueta35x22sem.Size = new System.Drawing.Size(194, 88);
             this.Etiqueta35x22sem.TabIndex = 1;
@@ -134,7 +151,7 @@ namespace GerenciadorEtiquetas
             this.Etiqueta55x35.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Etiqueta55x35.Image = ((System.Drawing.Image)(resources.GetObject("Etiqueta55x35.Image")));
             this.Etiqueta55x35.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Etiqueta55x35.Location = new System.Drawing.Point(3, 234);
+            this.Etiqueta55x35.Location = new System.Drawing.Point(3, 210);
             this.Etiqueta55x35.Name = "Etiqueta55x35";
             this.Etiqueta55x35.Size = new System.Drawing.Size(194, 83);
             this.Etiqueta55x35.TabIndex = 1;
@@ -149,9 +166,9 @@ namespace GerenciadorEtiquetas
             this.Etiqueta10x5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Etiqueta10x5.Image = ((System.Drawing.Image)(resources.GetObject("Etiqueta10x5.Image")));
             this.Etiqueta10x5.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Etiqueta10x5.Location = new System.Drawing.Point(3, 130);
+            this.Etiqueta10x5.Location = new System.Drawing.Point(3, 119);
             this.Etiqueta10x5.Name = "Etiqueta10x5";
-            this.Etiqueta10x5.Size = new System.Drawing.Size(194, 85);
+            this.Etiqueta10x5.Size = new System.Drawing.Size(194, 82);
             this.Etiqueta10x5.TabIndex = 1;
             this.Etiqueta10x5.Text = "Etiqueta 10x5\r\nEtiqueta Grande\r\n";
             this.Etiqueta10x5.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
@@ -417,6 +434,7 @@ namespace GerenciadorEtiquetas
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button Etiqueta55x35com;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
