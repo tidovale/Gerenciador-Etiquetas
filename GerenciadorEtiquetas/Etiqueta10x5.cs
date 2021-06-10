@@ -47,7 +47,7 @@ namespace GerenciadorEtiquetas
         }
         #endregion
 
-        // ULTIMA ATUALIZAÇÃO DIA 20/05/2021 
+        // ULTIMA ATUALIZAÇÃO DIA 10/06/2021 
 
 
         #region Buscar
@@ -99,6 +99,8 @@ namespace GerenciadorEtiquetas
                             pbCodQtde.Image.Save(@"C:\Windows\Temp\CodQtde.jpg");
                             codbarrasQtde.Dispose();
                         }
+
+                        #region COM LOGO / SEM LOGO
                         else if (tbCodProduto.Text == "95000")
                         {
 
@@ -141,24 +143,50 @@ namespace GerenciadorEtiquetas
                                 codbarrasQtde.Dispose();
                             }
                         }
+                        #endregion
+
                         else
                         {
-                            lbCodigo.Text = dtRes.Rows[0]["pro_codigo"].ToString();
-                            lbDescricao.Text = dtRes.Rows[0]["pro_resumo"].ToString().ToString();
-                            lbQtde.Text = tbQtde.Text;
-                            lbData.Text = tbData.Text;
+                            if (VerificaGtin(dtRes.Rows[0]["pro_barra"].ToString()))
+                            {
+                                lbCodigo.Text = dtRes.Rows[0]["pro_codigo"].ToString();
+                                lbDescricao.Text = dtRes.Rows[0]["pro_resumo"].ToString().ToString();
+                                lbQtde.Text = tbQtde.Text;
+                                lbData.Text = tbData.Text;
+                                lbGtin.Text = dtRes.Rows[0]["pro_barra"].ToString();
 
-                            Image codbarrasCod = Code128Rendering.MakeBarcodeImage(dtRes.Rows[0]["pro_codigo"].ToString(), 2, false);
-                            pbCodProd.Image = codbarrasCod;
-                            pbCodProd.Image.Save(@"C:\Windows\Temp\CodProd.jpg");
-                            codbarrasCod.Dispose();
+                                Image codbarrasQtde = Code128Rendering.MakeBarcodeImage(dtRes.Rows[0]["pro_barra"].ToString(), 2, false);
+                                pbCodQtde.Image = codbarrasQtde;
+                                pbCodQtde.Image.Save(@"C:\Windows\Temp\CodQtde.jpg");
+                                codbarrasQtde.Dispose();
+                            }
+                            else
+                            {
+                                if (MessageBox.Show($"O código " + tbCodProduto.Text + " não existe um GTIN válido, deseja imprimir mesmo assim ?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                {
+                                    lbCodigo.Text = dtRes.Rows[0]["pro_codigo"].ToString();
+                                    lbDescricao.Text = dtRes.Rows[0]["pro_resumo"].ToString().ToString();
+                                    lbQtde.Text = tbQtde.Text;
+                                    lbData.Text = tbData.Text;
 
-                            Image codbarrasQtde = Code128Rendering.MakeBarcodeImage(tbQtde.Text, 2, false);
-                            pbCodQtde.Image = codbarrasQtde;
-                            pbCodQtde.Image.Save(@"C:\Windows\Temp\CodQtde.jpg");
-                            codbarrasQtde.Dispose();
+                                    Image codbarrasCod = Code128Rendering.MakeBarcodeImage(dtRes.Rows[0]["pro_codigo"].ToString(), 2, false);
+                                    pbCodProd.Image = codbarrasCod;
+                                    pbCodProd.Image.Save(@"C:\Windows\Temp\CodProd.jpg");
+                                    codbarrasCod.Dispose();
+
+                                    Image codbarrasQtde = Code128Rendering.MakeBarcodeImage(tbQtde.Text, 2, false);
+                                    pbCodQtde.Image = codbarrasQtde;
+                                    pbCodQtde.Image.Save(@"C:\Windows\Temp\CodQtde.jpg");
+                                    codbarrasQtde.Dispose();
+                                }
+                                else
+                                {
+                                    tbCodProduto.Clear();
+                                    tbCodProduto.Focus();
+                                    tbData.Text = DateTime.Now.ToString();
+                                }
+                            }
                         }
-
                     }
                 }
             }
@@ -166,6 +194,20 @@ namespace GerenciadorEtiquetas
             {
 
                 MessageBox.Show(ex.Message, "Atenção: ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region VerificaGtin
+        private bool VerificaGtin(string Gtin)
+        {
+            if (Gtin.Contains("789848864") || Gtin.Contains("789848865"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         #endregion
@@ -232,6 +274,20 @@ namespace GerenciadorEtiquetas
         }
         #endregion
 
+        public bool verificarGtin()
+        {
+            DataTable dtRes = new DataTable();
+            dtRes = classbd.BuscaInfoEtiqueta(tbCodProduto.Text);
+            if (VerificaGtin(dtRes.Rows[0]["pro_barra"].ToString()))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         #region Imprimir_click
         private void btImprimir_Click_1(object sender, EventArgs e)
         {
@@ -285,9 +341,10 @@ namespace GerenciadorEtiquetas
             texto9 = lbGtin.Text;
             texto10 = lbLogo.Text;
             texto11 = lbTambasa.Text;
-            // texto11 = "SEM LOGO";
+         
 
             //e.Graphics.DrawRectangle(new Pen(Color.Black, 2), new Rectangle(0, 0, height, width));
+
             if (VerificarTambasa())
             {
                 //Código
@@ -348,31 +405,59 @@ namespace GerenciadorEtiquetas
             }
             else
             {
-                //Código
-                e.Graphics.DrawString(texto1, font13, Brushes.Black, new Rectangle(21, 30, height, width));
-                e.Graphics.DrawString(texto2, fontC, Brushes.Black, new Rectangle(91, 20, height, width));
-                Image imgCod = Image.FromFile(@"C:\Windows\Temp\CodProd.jpg");
-                e.Graphics.DrawImage(imgCod, 200, 10, 160, 35);
-                imgCod.Dispose();
-                //Data
-                e.Graphics.DrawString(texto5, font13, Brushes.Black, new Rectangle(21, 58, height, width));
-                e.Graphics.DrawString(texto6, font13, Brushes.Black, new Rectangle(71, 58, height, width));
+                if (verificarGtin())
+                {
+                    //Código
+                    e.Graphics.DrawString(texto1, font13, Brushes.Black, new Rectangle(21, 30, height, width));
+                    e.Graphics.DrawString(texto2, fontC, Brushes.Black, new Rectangle(91, 20, height, width));
+                    // Image imgCod = Image.FromFile(@"C:\Windows\Temp\CodProd.jpg");
+                    // e.Graphics.DrawImage(imgCod, 200, 10, 160, 35);
+                    // imgCod.Dispose();
+                    //Data
+                    e.Graphics.DrawString(texto5, font13, Brushes.Black, new Rectangle(21, 58, height, width));
+                    e.Graphics.DrawString(texto6, font13, Brushes.Black, new Rectangle(71, 58, height, width));
 
-                Image img = System.Drawing.Image.FromFile("C:\\Etiqueta-Produto\\Logo.jpg");
-                e.Graphics.DrawImage(img, 220, 57, 137, 23);
-                img.Dispose();
-                //Qtde
-                e.Graphics.DrawString(texto3, font13, Brushes.Black, new Rectangle(21, 88, height, width));
-                e.Graphics.DrawString(texto4, fontD, Brushes.Black, new Rectangle(71, 84, height, width));
-                //Cod-Tambasa
-                //e.Graphics.DrawString(texto9, fontT, Brushes.Black, new Rectangle(240, 122, height, width));
-                Image imgQtde = Image.FromFile(@"C:\Windows\Temp\CodQtde.jpg");
-                e.Graphics.DrawImage(imgQtde, 200, 88, 160, 35);
-                imgQtde.Dispose();
-                //Descrição
-                e.Graphics.DrawString(texto7, font13, Brushes.Black, new Rectangle(6, 130, height, width));
-                e.Graphics.DrawString(texto8, font11, Brushes.Black, new Rectangle(100, 133, 285, width));
-                //e.Graphics.DrawLine(new Pen(Color.Black), 20, 142, 520, 142);
+                    Image img = System.Drawing.Image.FromFile("C:\\Etiqueta-Produto\\Logo.jpg");
+                    e.Graphics.DrawImage(img, 220, 42, 137, 23);
+                    img.Dispose();
+                    //Qtde
+                    e.Graphics.DrawString(texto3, font13, Brushes.Black, new Rectangle(21, 88, height, width));
+                    e.Graphics.DrawString(texto4, fontD, Brushes.Black, new Rectangle(71, 84, height, width));
+                    //Cod-Tambasa
+                    e.Graphics.DrawString(texto9, fontT, Brushes.Black, new Rectangle(237, 112, height, width));
+                    Image imgQtde = Image.FromFile(@"C:\Windows\Temp\CodQtde.jpg");
+                    e.Graphics.DrawImage(imgQtde, 200, 78, 160, 35);
+                    imgQtde.Dispose();
+                    //Descrição
+                    e.Graphics.DrawString(texto7, font13, Brushes.Black, new Rectangle(6, 130, height, width));
+                    e.Graphics.DrawString(texto8, font11, Brushes.Black, new Rectangle(100, 133, 285, width));
+                    //e.Graphics.DrawLine(new Pen(Color.Black), 20, 142, 520, 142);
+                }
+                else
+                {
+                    e.Graphics.DrawString(texto1, font13, Brushes.Black, new Rectangle(21, 30, height, width));
+                    e.Graphics.DrawString(texto2, fontC, Brushes.Black, new Rectangle(91, 20, height, width));
+                    // Image imgCod = Image.FromFile(@"C:\Windows\Temp\CodProd.jpg");
+                    // e.Graphics.DrawImage(imgCod, 200, 10, 160, 35);
+                    // imgCod.Dispose();
+                    //Data
+                    e.Graphics.DrawString(texto5, font13, Brushes.Black, new Rectangle(21, 58, height, width));
+                    e.Graphics.DrawString(texto6, font13, Brushes.Black, new Rectangle(71, 58, height, width));
+
+                    Image img = System.Drawing.Image.FromFile("C:\\Etiqueta-Produto\\Logo.jpg");
+                    e.Graphics.DrawImage(img, 200, 45, 157, 43);
+                    img.Dispose();
+                    //Qtde
+                    e.Graphics.DrawString(texto3, font13, Brushes.Black, new Rectangle(21, 88, height, width));
+                    e.Graphics.DrawString(texto4, fontD, Brushes.Black, new Rectangle(71, 84, height, width));
+                    //Cod-Tambasa
+
+                    //Descrição
+                    e.Graphics.DrawString(texto7, font13, Brushes.Black, new Rectangle(6, 130, height, width));
+                    e.Graphics.DrawString(texto8, font11, Brushes.Black, new Rectangle(100, 133, 285, width));
+                    //e.Graphics.DrawLine(new Pen(Color.Black), 20, 142, 520, 142);
+                }
+
             }
 
 
